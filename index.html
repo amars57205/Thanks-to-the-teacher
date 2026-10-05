@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Content Security Policy لتعزيز الحماية ضد الاختراقات وثغرات XSS -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob:;">
+  <title>يوم المعلم العالمي | شهادة شكر وتقدير</title>
+
+  <!-- Google Fonts: Tajawal & Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" integrity="sha384-2T0/y698C2O+ZzV6C4b25Yw9f3q+y2L1A6gJ4hS2Y/8z+C0s4E6m7v6n5o4s3e2n1" crossorigin="anonymous"></script>
+
+  <!-- html2pdf Library لتصدير PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlTy/UrU3PKN4AG1221TzT3o7y5sK04gC6J1iP4iG/T6X9xT1N3l+P8l4V3S8s9z9/oE3A+8C1i+gI7yE+A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    :root {
+      --bg-dark: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: rgba(212, 175, 55, 0.35);
+      --gold-primary: #b8860b;
+      --gold-light: #7a5800;
+      --gold-dark: #8b6508;
+      --text-light: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Tajawal', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* 1. الشريط المتحرك العلوي Ticker Bar */
+    .ticker-wrap {
+      width: 100%;
+      background: linear-gradient(90deg, #d4af37, #f3e5ab, #d4af37);
+      color: #3d2b00;
+      overflow: hidden;
+      height: 44px;
+      line-height: 44px;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      position: relative;
+      z-index: 100;
+    }
+
+    .ticker {
+      display: inline-block;
+      white-space: nowrap;
+      padding-left: 100%;
+      animation: ticker-scroll 35s linear infinite;
+    }
+
+    .ticker__item {
+      display: inline-block;
+      padding: 0 30px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .ticker__item i {
+      margin-left: 8px;
+    }
+
+    @keyframes ticker-scroll {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-100%, 0, 0); }
+    }
+
+    .ticker-wrap:hover .ticker {
+      animation-play-state: paused;
+    }
+
+    /* Container العام */
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+      width: 100%;
+    }
+
+    /* 2. قسم الهيرو الرئيسي Hero Section */
+    .hero {
+      text-align: center;
+      padding: 40px 15px 30px;
+      position: relative;
+    }
+
+    .badge-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff8e7;
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-primary);
+      padding: 8px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(184, 134, 11, 0.1);
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #1e293b 0%, #b8860b 60%, #8b6508 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .btn-celebrate {
+      background: linear-gradient(135deg, #d4af37, #b8860b);
+      color: #ffffff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 800;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(184, 134, 11, 0.25);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-celebrate:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(184, 134, 11, 0.4);
+    }
+
+    /* تخطيط مولد الشهادات */
+    .generator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    /* كرت إدخال البيانات */
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-card-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.25rem;
+      color: var(--gold-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(184, 134, 11, 0.15);
+      padding-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--gold-dark);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid rgba(184, 134, 11, 0.3);
+      border-radius: 12px;
+      color: #1e293b;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 10px rgba(184, 134, 11, 0.2);
+      background: #ffffff;
+    }
+
+    select.form-control {
+      cursor: pointer;
+      background-color: #f8fafc;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.6;
+    }
+
+    .theme-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .theme-btn {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #1e293b;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .theme-btn.active, .theme-btn:hover {
+      border-color: var(--gold-primary);
+      background: #fff8e7;
+      color: var(--gold-dark);
+    }
+
+    /* منطقة المعاينة والشهادة */
+    .preview-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .preview-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .preview-badge {
+      font-size: 0.85rem;
+      color: var(--gold-primary);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-print {
+      background: linear-gradient(135deg, #d4af37, #b8860b);
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(184, 134, 11, 0.2);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(184, 134, 11, 0.35);
+    }
+
+    /* تصميم بطاقة/شهادة التهنئة بمقاس A5 أفقي مع التكيف التلقائي للموبايل والشاشات الذكية */
+    .greeting-card-wrapper {
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .greeting-card {
+      width: 195mm;
+      height: 132mm;
+      border-radius: 8mm;
+      padding: 12mm 10mm 7mm 10mm;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      transform-origin: top center;
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+
+    /* أنماط الإطار الملكي */
+    .card-theme-gold {
+      background: radial-gradient(circle at center, #ffffff 0%, #fffdf0 100%);
+      border: 2.5px solid #d4af37;
+    }
+
+    .card-theme-emerald {
+      background: radial-gradient(circle at center, #ffffff 0%, #f0fdf4 100%);
+      border: 2.5px solid #10b981;
+    }
+
+    .card-theme-sapphire {
+      background: radial-gradient(circle at center, #ffffff 0%, #eff6ff 100%);
+      border: 2.5px solid #3b82f6;
+    }
+
+    /* زخارف زوايا الشهادة */
+    .card-corner {
+      position: absolute;
+      font-size: 1.1rem;
+      color: rgba(184, 134, 11, 0.6);
+    }
+
+    .corner-tl { top: 7mm; right: 7mm; }
+    .corner-tr { top: 7mm; left: 7mm; }
+    .corner-bl { bottom: 6mm; right: 6mm; }
+    .corner-br { bottom: 6mm; left: 6mm; }
+
+    /* محتوى الشهادة الداخلي */
+    .card-header-text {
+      text-align: center;
+      border-bottom: 1px solid rgba(184, 134, 11, 0.25);
+      padding-top: 1mm;
+      padding-bottom: 2mm;
+    }
+
+    .card-badge-icon {
+      font-size: 1.4rem;
+      color: var(--gold-primary);
+      margin-bottom: 1mm;
+    }
+
+    .card-title-text {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--gold-dark);
+      letter-spacing: normal;
+    }
+
+    .card-subtitle-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 1mm;
+    }
+
+    .card-body-text {
+      text-align: center;
+      margin: auto 0;
+      padding: 1.5mm 0;
+    }
+
+    .card-salutation {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5mm;
+    }
+
+    .card-recipient {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--gold-primary);
+      margin-bottom: 2mm;
+      min-height: 7mm;
+      word-break: break-word;
+    }
+
+    .card-message {
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: #334155;
+      max-width: 90%;
+      margin: 0 auto;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .card-footer-text {
+      border-top: 1px solid rgba(184, 134, 11, 0.25);
+      padding-top: 2mm;
+      padding-bottom: 1mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .card-sender-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .card-sender-name {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--gold-dark);
+      min-height: 4mm;
+      display: inline-block;
+      word-break: break-word;
+    }
+
+    .card-date-badge {
+      font-size: 0.75rem;
+      color: var(--gold-primary);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Footer */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid rgba(184, 134, 11, 0.2);
+      padding: 25px 20px;
+      text-align: center;
+      color: var(--gold-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: auto;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.02);
+    }
+
+    /* إعدادات الطباعة للـ A5 */
+    @page {
+      size: A5 landscape;
+      margin: 0;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printableCard, #printableCard * {
+        visibility: visible;
+      }
+      #printableCard {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 148mm;
+        box-shadow: none !important;
+        border-radius: 0;
+        transform: none !important;
+        margin-bottom: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* تحسينات التكيف مع الشاشات اللوحية والمحمول والجوالات الذكية */
+    @media (max-width: 992px) {
+      .generator-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-title {
+        font-size: 1.75rem;
+      }
+      .badge-gold {
+        font-size: 0.85rem;
+        padding: 6px 16px;
+      }
+      .ticker__item {
+        font-size: 0.85rem;
+      }
+      .form-card {
+        padding: 18px;
+      }
+      .theme-selector {
+        grid-template-columns: 1fr;
+      }
+      .preview-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .action-buttons {
+        justify-content: center;
+        width: 100%;
+      }
+      .btn-print {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. الشريط المتحرك العلوي -->
+  <div class="ticker-wrap no-print">
+    <div class="ticker">
+      <div class="ticker__item"><i class="fa-solid fa-star"></i> شكراً لمن أضاء بفكره طريقنا</div>
+      <div class="ticker__item"><i class="fa-solid fa-heart"></i> شكراً لصناع المجد وبناة المستقبل</div>
+      <div class="ticker__item"><i class="fa-solid fa-award"></i> تحية تقدير وإجلال لكل معلم ومعلمة</div>
+      <div class="ticker__item"><i class="fa-solid fa-book-open"></i> بالعلم نرتقي وبجميل أثركم نهتدي</div>
+      <div class="ticker__item"><i class="fa-solid fa-crown"></i> يوم المعلم العالمي - عطاءٌ لا ينضب</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- 2. قسم الهيرو -->
+    <section class="hero no-print">
+      <div class="badge-gold">
+        <i class="fa-solid fa-calendar-day"></i> 5 أكتوبر - اليوم العالمي للمعلم
+      </div>
+      <h1 class="hero-title">شهادة شكر وتقدير لمعلمي</h1>
+      <div>
+        <button class="btn-celebrate" onclick="triggerConfetti()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> احتفل معنا الآن!
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. قسم مولد الشهادة المخصصة -->
+    <div class="generator-grid">
+
+      <!-- نموذج إدخال البيانات -->
+      <div class="form-card no-print">
+        <div class="form-card-title">
+          <i class="fa-solid fa-sliders"></i>
+          <span>بيانات التهنئة والشهادة</span>
+        </div>
+
+        <form id="cardForm" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <label for="teacherName"><i class="fa-solid fa-chalkboard-user"></i> اسم المعلم:</label>
+            <input type="text" id="teacherName" class="form-control" value="" oninput="updateCard()" placeholder="اكتب اسم المعلم هنا..." maxlength="60">
+          </div>
+
+          <div class="form-group">
+            <label for="studentName"><i class="fa-solid fa-user-graduate"></i> اسم الطالب:</label>
+            <input type="text" id="studentName" class="form-control" value="" oninput="updateCard()" placeholder="اكتب اسم الطالب هنا..." maxlength="60">
+          </div>
+
+          <div class="form-group">
+            <label for="presetSelect"><i class="fa-solid fa-list-check"></i> اختر نصاً جاهزاً أو اكتب رسالتك:</label>
+            <select id="presetSelect" class="form-control" onchange="applyPreset()">
+              <option value="شكراً لك من الأعماق على كل كلمة وفكرة أضاءت بها عقولنا." selected>شكراً لك من الأعماق على كل كلمة وفكرة أضاءت بها عقولنا.</option>
+              <option value="إلى من أبدع في تعليمنا وكان لنا قدوة ومثالاً يحتذى به، دمتم نبعاً للمعرفة.">إلى من أبدع في تعليمنا وكان لنا قدوة ومثالاً يحتذى به، دمتم نبعاً للمعرفة.</option>
+              <option value="معلمي الفاضل، عطاؤك لا يقاس بالأزمنة والسنوات، دمتم تاجاً وفخراً لنا.">معلمي الفاضل، عطاؤك لا يقاس بالأزمنة والسنوات، دمتم تاجاً وفخراً لنا.</option>
+              <option value="custom">-- نص مخصص --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="customMessage"><i class="fa-solid fa-pen-nib"></i> نص الرسالة:</label>
+            <textarea id="customMessage" class="form-control" oninput="updateCard()" placeholder="اكتب رسالة التهنئة الخاصة بك هنا..." maxlength="250">شكراً لك من الأعماق على كل كلمة وفكرة أضاءت بها عقولنا.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-palette"></i> اختر الإطار الملكي:</label>
+            <div class="theme-selector">
+              <button type="button" class="theme-btn active" id="btn-gold" onclick="setTheme('gold')">
+                <i class="fa-solid fa-crown" style="color:#b8860b;"></i> ذهبي
+              </button>
+              <button type="button" class="theme-btn" id="btn-emerald" onclick="setTheme('emerald')">
+                <i class="fa-solid fa-gem" style="color:#10b981;"></i> زمردي
+              </button>
+              <button type="button" class="theme-btn" id="btn-sapphire" onclick="setTheme('sapphire')">
+                <i class="fa-solid fa-gem" style="color:#3b82f6;"></i> ياقوتي
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- المعاينة المباشرة والبطاقة -->
+      <div class="preview-container">
+        <div class="preview-header no-print">
+          <span class="preview-badge"><i class="fa-solid fa-eye"></i> معاينة مباشرة للشهادة (A5)</span>
+          <div class="action-buttons">
+            <button class="btn-print" onclick="exportPDF()">
+              <i class="fa-solid fa-file-pdf"></i> تصدير PDF (A5)
+            </button>
+            <button class="btn-print" style="background: linear-gradient(135deg, #1e293b, #334155);" onclick="printCard()">
+              <i class="fa-solid fa-print"></i> طباعة
+            </button>
+          </div>
+        </div>
+
+        <!-- معاينة ورقة الشهادة -->
+        <div class="greeting-card-wrapper">
+          <div class="greeting-card card-theme-gold" id="printableCard">
+            <!-- زخارف الزوايا -->
+            <div class="card-corner corner-tl"><i class="fa-solid fa-crown"></i></div>
+            <div class="card-corner corner-tr"><i class="fa-solid fa-crown"></i></div>
+            <div class="card-corner corner-bl"><i class="fa-solid fa-award"></i></div>
+            <div class="card-corner corner-br"><i class="fa-solid fa-award"></i></div>
+
+            <!-- رأس الشهادة -->
+            <div class="card-header-text">
+              <div class="card-badge-icon"><i class="fa-solid fa-certificate"></i></div>
+              <div class="card-title-text">شهادة شكر وتقدير</div>
+              <div class="card-subtitle-text">بمناسبة اليوم العالمي للمعلم</div>
+            </div>
+
+            <!-- جسم الشهادة -->
+            <div class="card-body-text">
+              <div class="card-salutation">إلى المعلم القدير:</div>
+              <div class="card-recipient" id="cardTeacherDisplay"></div>
+              <div class="card-message" id="cardMessageDisplay">"شكراً لك من الأعماق على كل كلمة وفكرة أضاءت بها عقولنا."</div>
+            </div>
+
+            <!-- تذييل الشهادة -->
+            <div class="card-footer-text">
+              <div>
+                <span class="card-sender-label">مُقدّم من:</span>
+                <span class="card-sender-name" id="cardStudentDisplay"></span>
+              </div>
+              <div class="card-date-badge">
+                <i class="fa-solid fa-calendar-day"></i> 5 أكتوبر
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. تذييل الصفحة Footer -->
+  <footer class="no-print">
+    <p>تصميم أ.صلاح الرحيمان</p>
+  </footer>
+
+  <!-- جافاسكريبت للتحكم التفاعلي ببطاقة التهنئة والـ PDF ومزود بدوال حماية من XSS -->
+  <script>
+    // دالة لتطهير النصوص وتفادي ثغرات الحقن (XSS Sanitization)
+    function sanitizeText(str) {
+      if (!str) return '';
+      const temp = document.createElement('div');
+      temp.textContent = str;
+      return temp.innerHTML;
+    }
+
+    function triggerConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#b8860b', '#d4af37', '#ffffff']
+        });
+      }
+    }
+
+    function updateCard() {
+      const teacherInput = document.getElementById('teacherName').value.trim();
+      const studentInput = document.getElementById('studentName').value.trim();
+      const messageInput = document.getElementById('customMessage').value.trim() || 'شكراً لك من الأعماق.';
+
+      // تعقيم المدخلات باستخدام textContent الآمن للحماية من السكربتات الخبيثة
+      document.getElementById('cardTeacherDisplay').textContent = teacherInput;
+      document.getElementById('cardStudentDisplay').textContent = studentInput;
+      document.getElementById('cardMessageDisplay').textContent = `"${messageInput}"`;
+    }
+
+    // تطبيق النص الجاهز وتحديث مربع النص والمعاينة فوراً
+    function applyPreset() {
+      const select = document.getElementById('presetSelect');
+      const textarea = document.getElementById('customMessage');
+
+      if (select.value !== 'custom') {
+        textarea.value = select.value;
+      } else {
+        textarea.value = '';
+        textarea.focus();
+      }
+      updateCard();
+    }
+
+    function setTheme(theme) {
+      const card = document.getElementById('printableCard');
+      const buttons = document.querySelectorAll('.theme-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      card.className = 'greeting-card';
+
+      if (theme === 'gold') {
+        card.classList.add('card-theme-gold');
+        document.getElementById('btn-gold').classList.add('active');
+      } else if (theme === 'emerald') {
+        card.classList.add('card-theme-emerald');
+        document.getElementById('btn-emerald').classList.add('active');
+      } else if (theme === 'sapphire') {
+        card.classList.add('card-theme-sapphire');
+        document.getElementById('btn-sapphire').classList.add('active');
+      }
+      adjustScale();
+    }
+
+    function exportPDF() {
+      triggerConfetti();
+
+      const element = document.getElementById('printableCard');
+      const teacherName = document.getElementById('teacherName').value.trim() || 'معلمي';
+
+      // إلغاء تحجيم التكبير/التصغير مؤقتاً للتصدير الدقيق
+      const currentTransform = element.style.transform;
+      const currentMarginBottom = element.style.marginBottom;
+      element.style.transform = 'none';
+      element.style.marginBottom = '0';
+
+      const opt = {
+        margin:       [0, 0, 0, 0],
+        filename:     `شهادة_شكر_${teacherName}_A5.pdf`,
+        image:        { type: 'jpeg', quality: 1.0 },
+        html2canvas:  { 
+          scale: 2, 
+          useCORS: true, 
+          letterRendering: false,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF:        { unit: 'mm', format: 'a5', orientation: 'landscape' },
+        pagebreak:    { mode: 'avoid-all' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        // إعادة التحجيم للشاشات بعد الانتهاء من التصدير
+        element.style.transform = currentTransform;
+        element.style.marginBottom = currentMarginBottom;
+      });
+    }
+
+    function printCard() {
+      triggerConfetti();
+      setTimeout(() => {
+        window.print();
+      }, 300);
+    }
+
+    /* دالة ملاءمة الأبعاد والتكيف الذكي لجميع الشاشات والهواتف */
+    function adjustScale() {
+      const wrapper = document.querySelector('.greeting-card-wrapper');
+      const card = document.getElementById('printableCard');
+      if (!wrapper || !card) return;
+
+      // حساب العرض المتاح في الشاشة
+      const availableWidth = wrapper.clientWidth;
+      const cardWidth = card.offsetWidth;
+
+      if (availableWidth < cardWidth) {
+        const scale = (availableWidth - 10) / cardWidth;
+        card.style.transform = `scale(${scale})`;
+        card.style.marginBottom = `-${card.offsetHeight * (1 - scale)}px`;
+      } else {
+        card.style.transform = 'none';
+        card.style.marginBottom = '0';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCard();
+      adjustScale();
+      window.addEventListener('resize', adjustScale);
+      window.addEventListener('orientationchange', adjustScale);
+    });
+  </script>
+</body>
+</html>
