@@ -295,7 +295,7 @@
       width: 210mm;
       height: 148mm;
       border-radius: 6mm;
-      padding: 14mm 16mm 12mm 16mm; /* الهوامش الداخلية: أعلى، يمين، أسفل، يسار */
+      padding: 14mm 16mm 12mm 16mm;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -326,7 +326,7 @@
       border: 2.5px solid #3b82f6;
     }
 
-    /* زخارف الزوايا بمسافات متوازنة جداً من الأطراف */
+    /* زخارف الزوايا */
     .card-corner {
       position: absolute;
       font-size: 1.1rem;
@@ -744,33 +744,55 @@
       adjustScale();
     }
 
-    function exportPDF() {
+    async function exportPDF() {
       triggerConfetti();
 
-      const element = document.getElementById('printableCard');
+      const originalCard = document.getElementById('printableCard');
       const teacherName = document.getElementById('teacherName').value.trim() || 'معلمي';
 
-      const currentTransform = element.style.transform;
-      const currentMarginBottom = element.style.marginBottom;
-      element.style.transform = 'none';
-      element.style.marginBottom = '0';
+      // استنساخ عنصر الشهادة لتصديره بدقة معزولة عن التجاوب التلقائي للشاشة
+      const clone = originalCard.cloneNode(true);
+      
+      // إنشاء حاوية خفية خارج نطاق الشاشة لعرض الشهادة بالحجم الطبيعي بدون Scale
+      const pdfContainer = document.createElement('div');
+      pdfContainer.style.position = 'fixed';
+      pdfContainer.style.left = '-9999px';
+      pdfContainer.style.top = '0';
+      pdfContainer.style.width = '210mm';
+      pdfContainer.style.height = '148mm';
+      pdfContainer.style.overflow = 'hidden';
+      
+      // إلغاء تحويل الستايل scale على النسخة المستنسخة
+      clone.style.transform = 'none';
+      clone.style.margin = '0';
+      clone.style.boxShadow = 'none';
+      
+      pdfContainer.appendChild(clone);
+      document.body.appendChild(pdfContainer);
 
       const opt = {
-        margin:       0,
-        filename:     `شهادة_شكر_${teacherName}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false },
-        jsPDF:        { unit: 'mm', format: 'a5', orientation: 'landscape' }
+        margin: 0,
+        filename: `شهادة_شكر_${teacherName}.pdf`,
+        image: { type: 'jpeg', quality: 1.0 },
+        html2canvas: { 
+          scale: 3, 
+          useCORS: true, 
+          logging: false,
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: 1000
+        },
+        jsPDF: { unit: 'mm', format: 'a5', orientation: 'landscape' },
+        pagebreak: { mode: 'avoid-all' }
       };
 
-      html2pdf().set(opt).from(element).save().then(() => {
-        element.style.transform = currentTransform;
-        element.style.marginBottom = currentMarginBottom;
-      }).catch(err => {
+      try {
+        await html2pdf().set(opt).from(clone).save();
+      } catch (err) {
         console.error('Error generating PDF:', err);
-        element.style.transform = currentTransform;
-        element.style.marginBottom = currentMarginBottom;
-      });
+      } finally {
+        document.body.removeChild(pdfContainer);
+      }
     }
 
     function adjustScale() {
