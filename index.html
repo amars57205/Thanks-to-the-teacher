@@ -281,7 +281,7 @@
       box-shadow: 0 8px 20px rgba(184, 134, 11, 0.35);
     }
 
-    /* بطاقة الشهادة بمقاس A5 */
+    /* بطاقة الشهادة أفقية بحجم A5 مع ضبط دقيق للهوامش */
     .greeting-card-wrapper {
       width: 100%;
       overflow: hidden;
@@ -292,10 +292,10 @@
     }
 
     .greeting-card {
-      width: 195mm;
-      height: 132mm;
-      border-radius: 8mm;
-      padding: 10mm 12mm 8mm 12mm;
+      width: 210mm;
+      height: 148mm;
+      border-radius: 6mm;
+      padding: 14mm 16mm 12mm 16mm; /* الهوامش الداخلية: أعلى، يمين، أسفل، يسار */
       position: relative;
       display: flex;
       flex-direction: column;
@@ -326,6 +326,7 @@
       border: 2.5px solid #3b82f6;
     }
 
+    /* زخارف الزوايا بمسافات متوازنة جداً من الأطراف */
     .card-corner {
       position: absolute;
       font-size: 1.1rem;
@@ -333,24 +334,26 @@
       z-index: 2;
     }
 
-    .corner-tl { top: 6mm; right: 6mm; }
-    .corner-tr { top: 6mm; left: 6mm; }
-    .corner-bl { bottom: 6mm; right: 6mm; }
-    .corner-br { bottom: 6mm; left: 6mm; }
+    .corner-tl { top: 7mm; right: 8mm; }
+    .corner-tr { top: 7mm; left: 8mm; }
+    .corner-bl { bottom: 7mm; right: 8mm; }
+    .corner-br { bottom: 7mm; left: 8mm; }
 
-    /* الترويسة بضبط متوازن بالكامل */
+    /* الترويسة الموزونة بالتساوي */
     .card-header-text {
-      display: grid;
-      grid-template-columns: 44px 1fr 44px;
-      align-items: center;
-      border-bottom: 1px solid rgba(184, 134, 11, 0.25);
-      padding-bottom: 3mm;
-      padding-top: 1mm;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(184, 134, 11, 0.25);
+      padding-bottom: 4mm;
+      padding-top: 1mm;
       z-index: 1;
     }
 
     .card-badge-circle {
+      position: absolute;
+      left: 0;
       width: 44px;
       height: 44px;
       border-radius: 50%;
@@ -360,7 +363,6 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 3px 8px rgba(184, 134, 11, 0.15);
-      margin-right: 8px;
     }
 
     .card-badge-circle i {
@@ -370,11 +372,12 @@
 
     .card-header-titles {
       text-align: center;
+      margin: 0 auto;
     }
 
     .card-title-text {
       font-family: 'Aref Ruqaa', serif;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 700;
       color: var(--gold-dark);
       line-height: 1.1;
@@ -382,44 +385,44 @@
 
     .card-subtitle-text {
       font-family: 'Amiri', serif;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--text-muted);
-      margin-top: 1mm;
+      margin-top: 1.5mm;
     }
 
+    /* جسم الشهادة مع مراعاة الهوامش الوسطى */
     .card-body-text {
       text-align: center;
       margin: auto 0;
-      padding: 1mm 0;
+      padding: 2mm 5mm;
       direction: rtl;
     }
 
     .card-salutation {
       font-family: 'Amiri', serif;
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--text-muted);
-      margin-bottom: 1mm;
+      margin-bottom: 1.5mm;
     }
 
     .card-recipient {
       font-family: 'Aref Ruqaa', serif;
-      font-size: 2.1rem;
+      font-size: 2.3rem;
       font-weight: 700;
       color: var(--gold-primary);
-      margin-bottom: 2mm;
+      margin-bottom: 2.5mm;
       min-height: 9mm;
       word-break: break-word;
     }
 
-    /* نص الرسالة الضابط لاتجاه وعلامات الاقتباس */
     .card-message {
       font-family: 'Amiri', serif;
-      font-size: 1.3rem;
-      line-height: 1.5;
+      font-size: 1.35rem;
+      line-height: 1.6;
       color: #1e293b;
-      max-width: 92%;
+      max-width: 90%;
       margin: 0 auto;
       font-weight: 700;
       word-break: break-word;
@@ -427,9 +430,10 @@
       text-align: center;
     }
 
+    /* تذييل الشهادة */
     .card-footer-text {
       border-top: 1px solid rgba(184, 134, 11, 0.25);
-      padding-top: 2mm;
+      padding-top: 3mm;
       padding-bottom: 1mm;
       display: flex;
       justify-content: space-between;
@@ -439,7 +443,7 @@
 
     .card-sender-label {
       font-family: 'Amiri', serif;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text-muted);
       display: block;
@@ -448,7 +452,7 @@
 
     .card-sender-name {
       font-family: 'Aref Ruqaa', serif;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--gold-dark);
       min-height: 5mm;
@@ -458,7 +462,7 @@
 
     .card-date-badge {
       font-family: 'Amiri', serif;
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--gold-primary);
       font-weight: 700;
       display: flex;
@@ -477,6 +481,37 @@
       font-size: 0.95rem;
       margin-top: auto;
       box-shadow: 0 -4px 10px rgba(0,0,0,0.02);
+    }
+
+    @media print {
+      @page {
+        size: A5 landscape;
+        margin: 0;
+      }
+      body {
+        background: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .greeting-card-wrapper {
+        padding: 0 !important;
+      }
+      .greeting-card {
+        transform: none !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+      }
     }
 
     @media (max-width: 992px) {
@@ -596,7 +631,7 @@
       <!-- المعاينة والبطاقة -->
       <div class="preview-container">
         <div class="preview-header no-print">
-          <span class="preview-badge"><i class="fa-solid fa-eye"></i> معاينة مباشرة للشهادة (A5)</span>
+          <span class="preview-badge"><i class="fa-solid fa-eye"></i> معاينة مباشرة للشهادة (أفقية A5)</span>
           <div class="action-buttons">
             <button class="btn-print" onclick="exportPDF()">
               <i class="fa-solid fa-file-pdf"></i> صدر الشهادة وسلمها لمعلمك
@@ -612,16 +647,15 @@
             <div class="card-corner corner-bl"><i class="fa-solid fa-award"></i></div>
             <div class="card-corner corner-br"><i class="fa-solid fa-award"></i></div>
 
-            <!-- رأس الشهادة المكتمل والموزون -->
+            <!-- رأس الشهادة الموزون متطابق الطرفين -->
             <div class="card-header-text">
-              <div class="card-badge-circle">
-                <i class="fa-solid fa-certificate"></i>
-              </div>
               <div class="card-header-titles">
                 <div class="card-title-text">شهادة شكر وتقدير</div>
                 <div class="card-subtitle-text">بمناسبة اليوم العالمي للمعلم</div>
               </div>
-              <div></div> <!-- عنصر فارغ في اليسار للحفاظ على توازن الـ grid -->
+              <div class="card-badge-circle">
+                <i class="fa-solid fa-certificate"></i>
+              </div>
             </div>
 
             <!-- جسم الشهادة -->
@@ -669,7 +703,6 @@
       const studentInput = document.getElementById('studentName').value.trim();
       let messageInput = document.getElementById('customMessage').value.trim() || 'شكراً لك من الأعماق على كل كلمة وفكرة أضاءت بها عقولنا';
 
-      // تنظيف علامات التنصيص والنقاط الزائدة من الأطراف لمنع التداخل
       messageInput = messageInput.replace(/^[«"'\s]+|[»"'\s\.]+$|/g, '').trim();
 
       document.getElementById('cardTeacherDisplay').textContent = teacherInput;
